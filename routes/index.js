@@ -1,4 +1,5 @@
 var express = require('express');
+var User = require('../models/user.js');
 var router = express.Router();
 
 module.exports = function (app) {
@@ -9,6 +10,16 @@ module.exports = function (app) {
   });
 
   app.get('/reg', function (req, res, next) {
+    var newUser = new User({
+      name: 'theone',
+      email: '29@qq.com',
+      password: '123'
+    });
+    newUser.save( function (err) {
+      if(err) return next(err);
+
+      console.log('next');
+    })
     res.render('reg', { title: '注册'})
   });
 

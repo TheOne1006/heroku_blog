@@ -5,14 +5,37 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var flash = require('connect-flash');
+
 var routes = require('./routes/index');
+var settings = require('./settings');
+
+// session
+var session    = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 var app = express();
+
+
+
 
 app.set('port', process.env.PORT || 3000);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// use flash
+app.use(flash());
+
+// app.use(session({
+//   secret: settings.cookieSecret,
+//   cookie: {maxAge: 1000*60*60*24, secure: false},
+//   store: new MongoStore({
+//     db : settings.db,
+//   })
+// }));
+
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
