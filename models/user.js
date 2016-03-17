@@ -1,4 +1,6 @@
-var mongodb = require('./db');
+// var mongodb = require('./db');
+var settings = require('../settings');
+var MongoClient = require('mongodb').MongoClient;
 
 function User( user ) {
   this.name = user.name;
@@ -15,28 +17,26 @@ User.prototype.save = function ( cb ) {
     email : this.email
   };
 
-  mongodb.open( function (err, db) {
+  MongoClient.connect( settings.db , function (err, db) {
     if(err) {
       return cb(err);
     }
 
     db.collection('users', function (err, collection) {
       if(err) {
-        mongodb.close();
+        MongoClient.close();
         return cb(err);
       }
 
       collection.insert(user, {
         safe: true
       }, function (err, user) {
-        mongodb.close();
+        MongoClient.close();
         if(err) {
           return cb(err);
         }
         cb(null);
       });
-
-      console.log('连接成功');
 
     })
   })

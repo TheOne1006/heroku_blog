@@ -1,4 +1,4 @@
 module.exports = {
   cookieSecret: 'myblog',
-  db: "mongodb://root:root@ds064748.mlab.com:64748/shizhan_blog"
+  db: "mongodb://root:root@ds023088.mlab.com:23088/shizhan_blog"
 };

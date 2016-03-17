@@ -49,7 +49,9 @@ routes(app);
 
 app.use(function (err, req, res, next) {
   var meta = '[' + new Date() + '] ' + req.url + '\n';
-  errorLog.write(meta + err.stack + '\n');
+  // errorLog.write(meta + err.stack + '\n');
+  console.log(meta);
+  console.log(err.stack);
   next();
 });
 
